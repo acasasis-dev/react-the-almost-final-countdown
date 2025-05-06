@@ -1,17 +1,23 @@
 import TimerChallengeProps from "../interfaces/TimerChallengeProps"
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 
 export default function TimerChallenge({title, targetTime}: TimerChallengeProps) {
 	const [timerStarted, setTimerStarted] = useState<Boolean>(false);
 	const [timerExpired, setTimerExpired] = useState<Boolean>(false);
 
+	const timer = useRef<number>();
+
 	function handleStart() {
-		setTimeout(() => {
+		timer.current = setTimeout(() => {
 			setTimerExpired(true)
 		}, targetTime * 1000)
 
 		setTimerStarted(true);
+	}
+
+	function handleStop() {
+		clearTimeout(timer.current);
 	}
 
 	return (
@@ -22,7 +28,7 @@ export default function TimerChallenge({title, targetTime}: TimerChallengeProps)
 				{targetTime} second{targetTime > 1? 's' : ''}
 			</p>
 			<p>
-				<button onClick={handleStart}>
+				<button onClick={timerStarted ? handleStop : handleStart}>
 					{timerStarted ? 'Stop' : 'Start'} Challenge
 				</button>
 			</p>
