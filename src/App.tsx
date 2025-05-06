@@ -14,8 +14,8 @@ function App() {
     <>
       <Player />
       <div id="challenges">
-        {challenges.map(challenge => {
-          return <TimerChallenge title={challenge.title} targetTime={challenge.targetTime} />
+        {challenges.map((challenge, idx) => {
+          return <TimerChallenge key={idx} title={challenge.title} targetTime={challenge.targetTime} />
         })}
       </div>
     </>
