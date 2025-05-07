@@ -1,5 +1,5 @@
 import TimerChallengeProps from "../interfaces/TimerChallengeProps"
-import { useState, useRef } from 'react';
+import { useState, useRef, LegacyRef } from 'react';
 import ResultModal from "./ResultModal";
 
 
@@ -8,10 +8,12 @@ export default function TimerChallenge({title, targetTime}: TimerChallengeProps)
 	const [timerExpired, setTimerExpired] = useState<Boolean>(false);
 
 	const timer = useRef<number>();
+	const resultModalDialog = useRef<HTMLDialogElement>();
 
 	function handleStart() {
 		timer.current = setTimeout(() => {
 			setTimerExpired(true)
+			resultModalDialog.current!.showModal()
 		}, targetTime * 1000)
 
 		setTimerStarted(true);
@@ -23,7 +25,7 @@ export default function TimerChallenge({title, targetTime}: TimerChallengeProps)
 
 	return (
 		<>
-			{timerExpired && <ResultModal result="LOST" targetTime={targetTime} />}
+			<ResultModal ref={resultModalDialog as LegacyRef<HTMLDialogElement>} result="LOST" targetTime={targetTime} />
 			<section className="challenge">
 				<h2>{title}</h2>
 				<p className="challenge-time">
