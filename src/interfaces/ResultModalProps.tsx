@@ -1,8 +1,9 @@
 import React from "react"
+import { LegacyRef } from "react"
 
 
 export interface ResultModalProps {
 	result: string,
 	targetTime: number,
-	ref: React.LegacyRef<HTMLDialogElement>
+	ref: LegacyRef<HTMLDialogElement>
 }
