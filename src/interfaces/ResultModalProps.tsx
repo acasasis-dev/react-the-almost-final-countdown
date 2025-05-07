@@ -1,9 +1,9 @@
-import React from "react"
-import { LegacyRef } from "react"
+import { Ref } from "react"
+import DialogHandle from "../types/DialogHandle"
 
 
 export interface ResultModalProps {
 	result: string,
 	targetTime: number,
-	ref: LegacyRef<HTMLDialogElement>
+	ref: Ref<DialogHandle>
 }
