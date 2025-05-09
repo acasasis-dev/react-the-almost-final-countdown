@@ -1,5 +1,6 @@
 import { ResultModalProps } from "../interfaces/ResultModalProps"
 import { LegacyRef, useImperativeHandle, useRef } from "react"
+import { createPortal } from "react-dom";
 import DialogHandle from "../types/DialogHandle";
 import { GameResult } from "../types/GameResult";
 
@@ -20,7 +21,7 @@ export default function ResultModal({ref, targetTime, remainingTime, onReset}: R
 		}
 	})
 
-	return (
+	return createPortal(
 		<dialog ref={dialogRef as LegacyRef<HTMLDialogElement>} className="result-modal" onClose={onReset}>
 			<h2>YOU {`${result} ${result === GameResult.WON? `WITH SCORE OF ${score}%`: ''}`}</h2>
 			<p>The target time was <strong>{targetTime} second{targetTime > 1 ? 's' : ''}</strong></p>
@@ -28,6 +29,7 @@ export default function ResultModal({ref, targetTime, remainingTime, onReset}: R
 			<form method="dialog">
 				<button>Close</button>
 			</form>
-		</dialog>
+		</dialog>,
+		document.getElementById('modal') as Element
 	)
 }
