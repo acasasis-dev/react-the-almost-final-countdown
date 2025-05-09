@@ -3,7 +3,7 @@ import { LegacyRef, useImperativeHandle, useRef } from "react"
 import DialogHandle from "../types/DialogHandle";
 
 
-export default function ResultModal({ref, targetTime, remainingTime}: ResultModalProps) {
+export default function ResultModal({ref, targetTime, remainingTime, onReset}: ResultModalProps) {
 	const dialogRef = useRef<HTMLDialogElement>();
 
 	const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
@@ -23,7 +23,7 @@ export default function ResultModal({ref, targetTime, remainingTime}: ResultModa
 			<h2>YOU {result}</h2>
 			<p>The target time was <strong>{targetTime} second{targetTime > 1 ? 's' : ''}</strong></p>
 			<p>You stopped the timer @ <strong>{formattedRemainingTime} seconds left</strong></p>
-			<form method="dialog">
+			<form method="dialog" onSubmit={onReset}>
 				<button>Close</button>
 			</form>
 		</dialog>
