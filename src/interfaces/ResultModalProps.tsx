@@ -3,7 +3,7 @@ import DialogHandle from "../types/DialogHandle"
 
 
 export interface ResultModalProps {
-	result: string,
 	targetTime: number,
+	remainingTime: number,
 	ref: Ref<DialogHandle>
 }
