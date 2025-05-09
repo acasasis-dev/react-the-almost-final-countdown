@@ -21,11 +21,11 @@ export default function ResultModal({ref, targetTime, remainingTime, onReset}: R
 	})
 
 	return (
-		<dialog ref={dialogRef as LegacyRef<HTMLDialogElement>} className="result-modal">
+		<dialog ref={dialogRef as LegacyRef<HTMLDialogElement>} className="result-modal" onClose={onReset}>
 			<h2>YOU {`${result} ${result === GameResult.WON? `WITH SCORE OF ${score}%`: ''}`}</h2>
 			<p>The target time was <strong>{targetTime} second{targetTime > 1 ? 's' : ''}</strong></p>
 			<p>You stopped the timer @ <strong>{formattedRemainingTime} seconds left</strong></p>
-			<form method="dialog" onSubmit={onReset}>
+			<form method="dialog">
 				<button>Close</button>
 			</form>
 		</dialog>
